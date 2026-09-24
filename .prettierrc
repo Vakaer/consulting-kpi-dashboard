@@ -1,0 +1,21 @@
+{
+  "arrowParens": "avoid",
+  "endOfLine": "lf",
+  "jsxSingleQuote": false,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "useTabs": false,
+  "plugins": ["prettier-plugin-packagejson", "prettier-plugin-sort-imports"],
+  "importOrder": [
+    "^react",
+    "",
+    "<BUILT_IN_MODULES>",
+    "",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^@/",
+    "",
+    "^[./]"
+  ]
+}
