@@ -1,4 +1,4 @@
-import { Link, createFileRoute } from '@tanstack/react-router';
+import { Link, createFileRoute, useParams } from '@tanstack/react-router';
 import Typography from '@mui/material/Typography';
 import Skeleton from '@mui/material/Skeleton';
 import { styled } from '@mui/material/styles';
@@ -41,7 +41,8 @@ function formatCurrency(n: number) {
 }
 
 function EngagementDetailPage() {
-  const { id } = Route.useParams();
+  const params = useParams({ strict: false });
+  const id = typeof params.id === 'string' ? params.id : '';
   const { data, error, isLoading, refetch } = useEngagement(id);
 
   if (isLoading) {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -35,6 +35,13 @@ const DEBOUNCE_MS = 250;
 export function EngagementFilters({ value, onChange }: EngagementFiltersProps) {
   const [searchDraft, setSearchDraft] = useState(value.search ?? '');
   const [prevSearch, setPrevSearch] = useState(value.search);
+  const valueRef = useRef(value);
+  const onChangeRef = useRef(onChange);
+
+  useEffect(() => {
+    valueRef.current = value;
+    onChangeRef.current = onChange;
+  }, [value, onChange]);
 
   if (value.search !== prevSearch) {
     setPrevSearch(value.search);
@@ -42,13 +49,11 @@ export function EngagementFilters({ value, onChange }: EngagementFiltersProps) {
   }
 
   useEffect(() => {
-    if (searchDraft === (value.search ?? '')) return;
+    if (searchDraft === (valueRef.current.search ?? '')) return;
     const handle = window.setTimeout(() => {
-      onChange({ ...value, search: searchDraft });
+      onChangeRef.current({ ...valueRef.current, search: searchDraft });
     }, DEBOUNCE_MS);
     return () => window.clearTimeout(handle);
-    // Intentionally omit `value`/`onChange` identity: debounce only on draft text.
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- debounce searchDraft only
   }, [searchDraft]);
 
   return (

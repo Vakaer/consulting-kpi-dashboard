@@ -1,10 +1,11 @@
 import type { ReactNode } from 'react';
 
+import { Link as RouterLink } from '@tanstack/react-router';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import AppBar from '@mui/material/AppBar';
-import Link from '@mui/material/Link';
+import MuiLink from '@mui/material/Link';
 import Box from '@mui/material/Box';
 
 interface LayoutProps {
@@ -33,9 +34,14 @@ export function Layout({ children }: LayoutProps) {
       <AppBar elevation={0} position="static">
         <Toolbar>
           <Typography component="div" sx={{ flexGrow: 1 }} variant="h6">
-            <Link color="inherit" href="/" underline="none">
+            <MuiLink
+              color="inherit"
+              component={RouterLink}
+              to="/"
+              underline="none"
+            >
               Consulting KPI Dashboard
-            </Link>
+            </MuiLink>
           </Typography>
         </Toolbar>
       </AppBar>

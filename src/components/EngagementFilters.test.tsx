@@ -20,4 +20,31 @@ describe('EngagementFilters', () => {
       { timeout: 2000 },
     );
   });
+
+  it('preserves status when search debounce fires after status change', async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    const { rerender } = render(
+      <EngagementFilters onChange={onChange} value={{ status: 'all' }} />,
+    );
+    await user.type(
+      screen.getByRole('textbox', { name: 'Search engagements' }),
+      'ac',
+    );
+    rerender(
+      <EngagementFilters onChange={onChange} value={{ status: 'at_risk' }} />,
+    );
+    await waitFor(
+      () => {
+        expect(onChange).toHaveBeenCalled();
+        const last = onChange.mock.calls.at(-1)?.[0] as {
+          search?: string;
+          status?: string;
+        };
+        expect(last.status).toBe('at_risk');
+        expect(last.search).toBe('ac');
+      },
+      { timeout: 2000 },
+    );
+  });
 });

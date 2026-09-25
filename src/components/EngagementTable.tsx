@@ -37,7 +37,12 @@ export function EngagementTable({ engagements }: EngagementTableProps) {
 
   if (engagements.length === 0) {
     return (
-      <Typography color="text.secondary" role="status">
+      <Typography
+        align="center"
+        color="text.secondary"
+        role="status"
+        sx={{ py: 4 }}
+      >
         No engagements match your filters.
       </Typography>
     );
