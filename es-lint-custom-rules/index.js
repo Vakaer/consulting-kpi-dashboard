@@ -1,6 +1,6 @@
-const styledOverSx = require('./styled-over-sx');
+import styledOverSx from './styled-over-sx.js';
 
-module.exports = {
+export default {
   rules: {
     'styled-over-sx': styledOverSx,
   },

@@ -1,4 +1,5 @@
 import { defineConfig, globalIgnores } from 'eslint/config';
+import customRules from './es-lint-custom-rules/index.js';
 import perfectionist from 'eslint-plugin-perfectionist';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import reactHooks from 'eslint-plugin-react-hooks';
@@ -30,6 +31,7 @@ export default defineConfig([
     plugins: {
       react,
       import: importPlugin,
+      custom: customRules,
     },
     rules: {
       'react/display-name': 'off',
@@ -45,6 +47,7 @@ export default defineConfig([
         { allowConstantExport: true },
       ],
       'no-console': 'error',
+      'custom/styled-over-sx': 'error',
       'no-debugger': 'error',
       'no-unused-vars': 'off',
       'no-useless-rename': 'error',
