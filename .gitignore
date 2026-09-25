@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 # Vitest reports and artifacts
 .vitest/
+
+.env.local
+.env.*.local
