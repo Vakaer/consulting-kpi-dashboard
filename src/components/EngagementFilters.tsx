@@ -6,7 +6,6 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { styled } from '@mui/material/styles';
 import Select from '@mui/material/Select';
-import Stack from '@mui/material/Stack';
 
 import type {
   EngagementFilters as Filters,
@@ -18,7 +17,8 @@ interface EngagementFiltersProps {
   onChange: (next: Filters) => void;
 }
 
-const FilterRow = styled(Stack)(({ theme }) => ({
+const FilterRow = styled('form')(({ theme }) => ({
+  display: 'flex',
   flexDirection: 'row',
   flexWrap: 'wrap',
   gap: theme.spacing(2),
@@ -52,7 +52,7 @@ export function EngagementFilters({ value, onChange }: EngagementFiltersProps) {
   }, [searchDraft]);
 
   return (
-    <FilterRow component="form" onSubmit={e => e.preventDefault()}>
+    <FilterRow onSubmit={e => e.preventDefault()}>
       <TextField
         label="Search"
         onChange={e => setSearchDraft(e.target.value)}

@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
 
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { styled } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import AppBar from '@mui/material/AppBar';
@@ -18,9 +17,14 @@ const Root = styled(Box)({
   minHeight: '100vh',
 });
 
-const Main = styled(Container)(({ theme }) => ({
+const Main = styled('main')(({ theme }) => ({
   flex: 1,
+  width: '100%',
+  maxWidth: theme.breakpoints.values.lg,
+  marginInline: 'auto',
+  paddingInline: theme.spacing(2),
   paddingBlock: theme.spacing(3),
+  boxSizing: 'border-box',
 }));
 
 export function Layout({ children }: LayoutProps) {
@@ -35,7 +39,7 @@ export function Layout({ children }: LayoutProps) {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Main component="main">{children}</Main>
+      <Main>{children}</Main>
     </Root>
   );
 }
