@@ -69,8 +69,30 @@ describe('fetchEngagements', () => {
     expect(result[0]?.clientName).toBe('Northwind Retail Group');
   });
 
+  it('fetches list from live API when VITE_API_URL is set', async () => {
+    vi.stubEnv('VITE_API_URL', 'http://localhost:3001/');
+    const fetchMock = vi.fn().mockResolvedValue({
+      json: async () => sample,
+      ok: true,
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    const result = await fetchEngagements({ status: 'active' });
+    expect(fetchMock).toHaveBeenCalledWith('http://localhost:3001/engagements');
+    expect(result).toHaveLength(1);
+    expect(result[0]?.clientName).toBe('Northwind Retail Group');
+  });
+
   it('throws when response is not ok', async () => {
     vi.stubEnv('VITE_API_URL', '');
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false }));
+    await expect(fetchEngagements({})).rejects.toThrow(
+      'Failed to fetch engagements',
+    );
+  });
+
+  it('throws when live API response is not ok', async () => {
+    vi.stubEnv('VITE_API_URL', 'http://localhost:3001');
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false }));
     await expect(fetchEngagements({})).rejects.toThrow(
       'Failed to fetch engagements',
@@ -89,6 +111,21 @@ describe('fetchEngagementById', () => {
       }),
     );
     const eng = await fetchEngagementById('eng-002');
+    expect(eng.clientName).toBe('Contoso Financial');
+  });
+
+  it('fetches detail from live API when VITE_API_URL is set', async () => {
+    vi.stubEnv('VITE_API_URL', 'http://localhost:3001');
+    const fetchMock = vi.fn().mockResolvedValue({
+      json: async () => sample[1],
+      ok: true,
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    const eng = await fetchEngagementById('eng-002');
+    expect(fetchMock).toHaveBeenCalledWith(
+      'http://localhost:3001/engagements/eng-002',
+    );
     expect(eng.clientName).toBe('Contoso Financial');
   });
 });

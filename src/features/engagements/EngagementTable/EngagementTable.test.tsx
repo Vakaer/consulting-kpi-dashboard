@@ -9,8 +9,8 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 
-import { EngagementTable } from './EngagementTable';
 import type { Engagement } from '@/types/engagement';
+import { EngagementTable } from './EngagementTable';
 
 const sample: Engagement = {
   id: 'eng-1',
@@ -41,7 +41,10 @@ function renderWithRouter(ui: React.ReactNode) {
     history: createMemoryHistory({ initialEntries: ['/'] }),
     routeTree: root.addChildren([index, detail]),
   });
-  return render(<RouterProvider router={router} />);
+  return {
+    ...render(<RouterProvider router={router} />),
+    router,
+  };
 }
 
 describe('EngagementTable', () => {
@@ -60,12 +63,23 @@ describe('EngagementTable', () => {
     );
   });
 
-  it('activates row with Enter key', async () => {
+  it('navigates to detail on client link Enter', async () => {
     const user = userEvent.setup();
-    renderWithRouter(<EngagementTable engagements={[sample]} />);
-    const row = await screen.findByRole('link', { name: 'Open Acme Corp' });
-    row.focus();
+    const { router } = renderWithRouter(
+      <EngagementTable engagements={[sample]} />,
+    );
+    const link = await screen.findByRole('link', { name: 'Open Acme Corp' });
+    link.focus();
     await user.keyboard('{Enter}');
-    expect(row).toBeInTheDocument();
+    expect(router.state.location.pathname).toBe('/engagements/eng-1');
+  });
+
+  it('navigates to detail on row click', async () => {
+    const user = userEvent.setup();
+    const { router } = renderWithRouter(
+      <EngagementTable engagements={[sample]} />,
+    );
+    await user.click(await screen.findByText('40%'));
+    expect(router.state.location.pathname).toBe('/engagements/eng-1');
   });
 });

@@ -7,14 +7,15 @@ import TableRow from '@mui/material/TableRow';
 import {
   ClickableRow,
   ClientCell,
+  ClientLink,
   EmptyState,
   MonoCell,
   ScrollPaper,
   WideTable,
 } from './EngagementTable.styles';
+import { formatCurrency } from '@/utils/format-currency';
 import { StatusBadge } from '@/components/StatusBadge';
 import type { Engagement } from '@/types/engagement';
-import { formatCurrency } from '@/utils/format-currency';
 
 interface EngagementTableProps {
   engagements: Engagement[];
@@ -63,21 +64,17 @@ export function EngagementTable({ engagements }: EngagementTableProps) {
         </TableHead>
         <TableBody>
           {engagements.map(e => (
-            <ClickableRow
-              aria-label={`Open ${e.clientName}`}
-              hover
-              key={e.id}
-              onClick={() => openDetail(e.id)}
-              onKeyDown={event => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                  event.preventDefault();
-                  openDetail(e.id);
-                }
-              }}
-              role="link"
-              tabIndex={0}
-            >
-              <ClientCell>{e.clientName}</ClientCell>
+            <ClickableRow hover key={e.id} onClick={() => openDetail(e.id)}>
+              <ClientCell>
+                <ClientLink
+                  aria-label={`Open ${e.clientName}`}
+                  onClick={event => event.stopPropagation()}
+                  params={{ id: e.id }}
+                  to="/engagements/$id"
+                >
+                  {e.clientName}
+                </ClientLink>
+              </ClientCell>
               <TableCell>
                 <StatusBadge status={e.status} />
               </TableCell>
