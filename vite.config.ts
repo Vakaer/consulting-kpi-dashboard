@@ -10,7 +10,7 @@ export default defineConfig({
     tanstackRouter({
       target: 'react',
       autoCodeSplitting: true,
-      routeFileIgnorePattern: '\\.test\\.(ts|tsx)$',
+      routeFileIgnorePattern: '\\.(test|styles)\\.(ts|tsx)$',
     }),
     react(),
   ],

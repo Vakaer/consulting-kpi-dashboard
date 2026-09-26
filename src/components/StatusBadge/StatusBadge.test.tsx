@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { StatusBadge } from '@/components/StatusBadge';
+import { StatusBadge } from './StatusBadge';
 
 describe('StatusBadge', () => {
   it('renders Active for active status', () => {

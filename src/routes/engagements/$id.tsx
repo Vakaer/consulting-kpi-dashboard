@@ -1,37 +1,26 @@
-import { Link, createFileRoute, useParams } from '@tanstack/react-router';
+import { createFileRoute, useParams } from '@tanstack/react-router';
 import Typography from '@mui/material/Typography';
 import Skeleton from '@mui/material/Skeleton';
-import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import Alert from '@mui/material/Alert';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-import { TimelineChart } from '@/components/TimelineChart';
+import {
+  BackLink,
+  MetaFigure,
+  MetaRow,
+  PageTitle,
+} from '@/routes/engagements/-$id.styles';
+import { TimelineChart } from '@/features/engagements/TimelineChart';
 import { StatusBadge } from '@/components/StatusBadge';
-import { BudgetChart } from '@/components/BudgetChart';
+import { BudgetChart } from '@/features/engagements/BudgetChart';
 import { useEngagement } from '@/api/hooks';
 import { formatCurrency } from '@/utils/format-currency';
 
 export const Route = createFileRoute('/engagements/$id')({
   component: EngagementDetailPage,
 });
-
-const BackLink = styled(Link)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  textDecoration: 'none',
-  fontWeight: 600,
-  '&:hover': { textDecoration: 'underline' },
-}));
-
-const MetaRow = styled(Stack)(({ theme }) => ({
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  gap: theme.spacing(2),
-  alignItems: 'center',
-  marginBottom: theme.spacing(3),
-}));
 
 function EngagementDetailPage() {
   const params = useParams({ strict: false });
@@ -74,21 +63,21 @@ function EngagementDetailPage() {
   return (
     <Box>
       <BackLink to="/">← Back to dashboard</BackLink>
-      <Typography component="h1" gutterBottom sx={{ mt: 2 }} variant="h4">
+      <PageTitle component="h1" gutterBottom variant="h4">
         {data.clientName}
-      </Typography>
+      </PageTitle>
       <MetaRow>
         <StatusBadge status={data.status} />
-        <Typography variant="body2">
+        <MetaFigure>
           Budget {formatCurrency(data.budget)} · Actuals{' '}
           {formatCurrency(data.actuals)}
-        </Typography>
-        <Typography variant="body2">
+        </MetaFigure>
+        <MetaFigure>
           {data.percentComplete}% complete · {data.hoursLogged} hours
-        </Typography>
-        <Typography variant="body2">
+        </MetaFigure>
+        <MetaFigure>
           {data.startDate} → {data.endDate}
-        </Typography>
+        </MetaFigure>
       </MetaRow>
       <Grid container spacing={2}>
         <Grid size={{ xs: 12, md: 6 }}>

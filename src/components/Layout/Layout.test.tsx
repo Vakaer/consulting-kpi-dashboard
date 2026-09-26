@@ -7,7 +7,7 @@ import {
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { Layout } from '@/components/Layout';
+import { Layout } from './Layout';
 
 describe('Layout', () => {
   it('exposes a main landmark', async () => {

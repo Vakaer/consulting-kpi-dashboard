@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { TimelineChart } from '@/components/TimelineChart';
+import { TimelineChart } from './TimelineChart';
 
 describe('TimelineChart', () => {
   it('renders timeline heading', () => {

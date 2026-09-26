@@ -9,21 +9,19 @@ import {
   YAxis,
 } from 'recharts';
 import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
+import { useTheme } from '@mui/material/styles';
 
+import { ChartSurface } from './TimelineChart.styles';
 import type { TimelineEvent } from '@/types/engagement';
 
 interface TimelineChartProps {
   timeline: TimelineEvent[];
 }
 
-const ChartPaper = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(2),
-  height: 320,
-}));
-
 export function TimelineChart({ timeline }: TimelineChartProps) {
+  const theme = useTheme();
+  const muted = theme.palette.text.secondary;
+  const rule = theme.palette.divider;
   const data = timeline.map((event, index) => ({
     date: event.date,
     milestone: event.milestone,
@@ -32,15 +30,22 @@ export function TimelineChart({ timeline }: TimelineChartProps) {
   }));
 
   return (
-    <ChartPaper aria-label="Engagement timeline chart" elevation={1}>
+    <ChartSurface aria-label="Engagement timeline chart" variant="outlined">
       <Typography component="h2" gutterBottom variant="h6">
         Timeline
       </Typography>
       <ResponsiveContainer height="85%" width="100%">
         <LineChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" />
-          <YAxis allowDecimals={false} />
+          <CartesianGrid
+            stroke={rule}
+            strokeDasharray="3 3"
+            vertical={false}
+          />
+          <XAxis dataKey="date" tick={{ fill: muted, fontSize: 12 }} />
+          <YAxis
+            allowDecimals={false}
+            tick={{ fill: muted, fontSize: 12 }}
+          />
           <Tooltip
             formatter={value => [value, 'Complete']}
             labelFormatter={label => {
@@ -52,11 +57,12 @@ export function TimelineChart({ timeline }: TimelineChartProps) {
           <Line
             dataKey="complete"
             name="Complete"
-            stroke="#2e7d32"
+            stroke={theme.palette.primary.main}
+            strokeWidth={2}
             type="monotone"
           />
         </LineChart>
       </ResponsiveContainer>
-    </ChartPaper>
+    </ChartSurface>
   );
 }

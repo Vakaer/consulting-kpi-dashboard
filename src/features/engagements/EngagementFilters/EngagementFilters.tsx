@@ -1,34 +1,23 @@
 import { useEffect, useRef, useState } from 'react';
 
-import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
-import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import { styled } from '@mui/material/styles';
 import Select from '@mui/material/Select';
 
 import type {
   EngagementFilters as Filters,
   EngagementStatus,
 } from '@/types/engagement';
+import {
+  FilterRow,
+  SearchField,
+  StatusControl,
+} from './EngagementFilters.styles';
 
 interface EngagementFiltersProps {
   value: Filters;
   onChange: (next: Filters) => void;
 }
-
-const FilterRow = styled('form')(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  gap: theme.spacing(2),
-  alignItems: 'center',
-  marginBottom: theme.spacing(2),
-}));
-
-const StatusControl = styled(FormControl)({
-  minWidth: 160,
-});
 
 const DEBOUNCE_MS = 250;
 
@@ -58,14 +47,13 @@ export function EngagementFilters({ value, onChange }: EngagementFiltersProps) {
 
   return (
     <FilterRow onSubmit={e => e.preventDefault()}>
-      <TextField
+      <SearchField
         label="Search"
         onChange={e => setSearchDraft(e.target.value)}
         size="small"
         slotProps={{
           htmlInput: { 'aria-label': 'Search engagements' },
         }}
-        sx={{ minWidth: 220 }}
         value={searchDraft}
       />
       <StatusControl size="small">

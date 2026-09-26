@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { KpiCard } from '@/components/KpiCard';
+import { KpiCard } from './KpiCard';
 
 describe('KpiCard', () => {
   it('renders label and value with combined aria-label', () => {

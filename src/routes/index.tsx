@@ -4,16 +4,20 @@ import { createFileRoute } from '@tanstack/react-router';
 import Typography from '@mui/material/Typography';
 import Skeleton from '@mui/material/Skeleton';
 import Button from '@mui/material/Button';
-import Alert from '@mui/material/Alert';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
 import type { EngagementFilters as Filters } from '@/types/engagement';
-import { EngagementFilters } from '@/components/EngagementFilters';
-import { EngagementTable } from '@/components/EngagementTable';
+import {
+  ErrorAlert,
+  KpiSkeletonCell,
+  UpdatingLabel,
+} from '@/routes/-index.styles';
+import { EngagementFilters } from '@/features/engagements/EngagementFilters';
+import { EngagementTable } from '@/features/engagements/EngagementTable';
 import { applyEngagementFilters } from '@/api/engagements';
 import { computeDashboardKpis } from '@/api/kpi';
-import { KpiCard } from '@/components/KpiCard';
+import { KpiLedger } from '@/features/engagements/KpiLedger';
+import { KpiCard } from '@/features/engagements/KpiCard';
 import { useEngagements } from '@/api/hooks';
 import { formatCurrency } from '@/utils/format-currency';
 
@@ -41,56 +45,46 @@ function DashboardPage() {
       <EngagementFilters onChange={setFilters} value={filters} />
 
       {isLoading ? (
-        <Grid container spacing={2} sx={{ mb: 3 }}>
+        <KpiLedger>
           {Array.from({ length: 4 }).map((_, i) => (
-            <Grid key={i} size={{ xs: 12, sm: 6, md: 3 }}>
-              <Skeleton height={96} variant="rounded" />
-            </Grid>
+            <KpiSkeletonCell key={i}>
+              <Skeleton height={14} width="40%" />
+              <Skeleton height={28} sx={{ mt: 1 }} width="55%" />
+            </KpiSkeletonCell>
           ))}
-        </Grid>
+        </KpiLedger>
       ) : null}
 
       {error ? (
-        <Alert
+        <ErrorAlert
           action={
             <Button color="inherit" onClick={() => void refetch()} size="small">
               Retry
             </Button>
           }
           severity="error"
-          sx={{ mb: 2 }}
         >
           {error.message || 'Failed to load engagements'}
-        </Alert>
+        </ErrorAlert>
       ) : null}
 
       {!isLoading && !error ? (
-        <Grid container spacing={2} sx={{ mb: 3 }}>
-          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-            <KpiCard label="Total Active" value={kpis.totalActive} />
-          </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-            <KpiCard
-              label="Total Budget"
-              value={formatCurrency(kpis.totalBudget)}
-            />
-          </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-            <KpiCard label="At Risk" value={kpis.atRiskCount} />
-          </Grid>
-          <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-            <KpiCard
-              label="Avg % Complete"
-              value={`${kpis.avgPercentComplete}%`}
-            />
-          </Grid>
-        </Grid>
+        <KpiLedger>
+          <KpiCard label="Total Active" value={kpis.totalActive} />
+          <KpiCard
+            label="Total Budget"
+            value={formatCurrency(kpis.totalBudget)}
+          />
+          <KpiCard emphasize label="At Risk" value={kpis.atRiskCount} />
+          <KpiCard
+            label="Avg % Complete"
+            value={`${kpis.avgPercentComplete}%`}
+          />
+        </KpiLedger>
       ) : null}
 
       {isFetching && !isLoading ? (
-        <Typography color="text.secondary" sx={{ mb: 1 }} variant="body2">
-          Updating…
-        </Typography>
+        <UpdatingLabel variant="body2">Updating…</UpdatingLabel>
       ) : null}
 
       {!isLoading && !error ? (

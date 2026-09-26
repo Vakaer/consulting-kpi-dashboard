@@ -9,7 +9,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 
-import { EngagementTable } from '@/components/EngagementTable';
+import { EngagementTable } from './EngagementTable';
 import type { Engagement } from '@/types/engagement';
 
 const sample: Engagement = {

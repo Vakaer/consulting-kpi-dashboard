@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
-import { EngagementFilters } from '@/components/EngagementFilters';
+import { EngagementFilters } from './EngagementFilters';
 
 describe('EngagementFilters', () => {
   it('calls onChange when search text changes after debounce', async () => {

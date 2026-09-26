@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { BudgetChart } from '@/components/BudgetChart';
+import { BudgetChart } from './BudgetChart';
 
 describe('BudgetChart', () => {
   it('renders chart heading', () => {
