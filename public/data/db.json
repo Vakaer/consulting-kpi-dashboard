@@ -1,0 +1,225 @@
+{
+  "engagements": [
+    {
+      "id": "eng-001",
+      "clientName": "Northwind Retail Group",
+      "status": "active",
+      "budget": 250000,
+      "actuals": 168000,
+      "hoursLogged": 640,
+      "percentComplete": 62,
+      "startDate": "2026-03-01",
+      "endDate": "2026-09-30",
+      "timeline": [
+        {
+          "date": "2026-03-01",
+          "milestone": "Kickoff",
+          "complete": true
+        },
+        {
+          "date": "2026-04-15",
+          "milestone": "Discovery complete",
+          "complete": true
+        },
+        {
+          "date": "2026-06-30",
+          "milestone": "MVP delivered",
+          "complete": true
+        },
+        {
+          "date": "2026-09-30",
+          "milestone": "Go-live",
+          "complete": false
+        }
+      ]
+    },
+    {
+      "id": "eng-002",
+      "clientName": "Contoso Financial",
+      "status": "at_risk",
+      "budget": 180000,
+      "actuals": 172000,
+      "hoursLogged": 820,
+      "percentComplete": 71,
+      "startDate": "2026-01-15",
+      "endDate": "2026-08-15",
+      "timeline": [
+        {
+          "date": "2026-01-15",
+          "milestone": "Kickoff",
+          "complete": true
+        },
+        {
+          "date": "2026-03-01",
+          "milestone": "Architecture approved",
+          "complete": true
+        },
+        {
+          "date": "2026-05-20",
+          "milestone": "UAT start",
+          "complete": false
+        },
+        {
+          "date": "2026-08-15",
+          "milestone": "Go-live",
+          "complete": false
+        }
+      ]
+    },
+    {
+      "id": "eng-003",
+      "clientName": "Fabrikam Health Systems",
+      "status": "completed",
+      "budget": 95000,
+      "actuals": 91000,
+      "hoursLogged": 410,
+      "percentComplete": 100,
+      "startDate": "2025-09-01",
+      "endDate": "2026-02-28",
+      "timeline": [
+        {
+          "date": "2025-09-01",
+          "milestone": "Kickoff",
+          "complete": true
+        },
+        {
+          "date": "2025-11-15",
+          "milestone": "Pilot live",
+          "complete": true
+        },
+        {
+          "date": "2026-02-28",
+          "milestone": "Handover",
+          "complete": true
+        }
+      ]
+    },
+    {
+      "id": "eng-004",
+      "clientName": "Adventure Works Manufacturing",
+      "status": "active",
+      "budget": 320000,
+      "actuals": 98000,
+      "hoursLogged": 290,
+      "percentComplete": 28,
+      "startDate": "2026-05-01",
+      "endDate": "2026-12-15",
+      "timeline": [
+        {
+          "date": "2026-05-01",
+          "milestone": "Kickoff",
+          "complete": true
+        },
+        {
+          "date": "2026-07-01",
+          "milestone": "Discovery complete",
+          "complete": false
+        },
+        {
+          "date": "2026-10-01",
+          "milestone": "MVP delivered",
+          "complete": false
+        },
+        {
+          "date": "2026-12-15",
+          "milestone": "Go-live",
+          "complete": false
+        }
+      ]
+    },
+    {
+      "id": "eng-005",
+      "clientName": "Tailspin Toys Digital",
+      "status": "at_risk",
+      "budget": 140000,
+      "actuals": 125000,
+      "hoursLogged": 560,
+      "percentComplete": 55,
+      "startDate": "2026-02-01",
+      "endDate": "2026-07-31",
+      "timeline": [
+        {
+          "date": "2026-02-01",
+          "milestone": "Kickoff",
+          "complete": true
+        },
+        {
+          "date": "2026-04-01",
+          "milestone": "Design freeze",
+          "complete": true
+        },
+        {
+          "date": "2026-06-15",
+          "milestone": "Beta release",
+          "complete": false
+        },
+        {
+          "date": "2026-07-31",
+          "milestone": "Go-live",
+          "complete": false
+        }
+      ]
+    },
+    {
+      "id": "eng-006",
+      "clientName": "Wide World Importers",
+      "status": "active",
+      "budget": 210000,
+      "actuals": 145000,
+      "hoursLogged": 510,
+      "percentComplete": 48,
+      "startDate": "2026-04-01",
+      "endDate": "2026-11-30",
+      "timeline": [
+        {
+          "date": "2026-04-01",
+          "milestone": "Kickoff",
+          "complete": true
+        },
+        {
+          "date": "2026-06-01",
+          "milestone": "Integration start",
+          "complete": true
+        },
+        {
+          "date": "2026-09-15",
+          "milestone": "UAT",
+          "complete": false
+        },
+        {
+          "date": "2026-11-30",
+          "milestone": "Go-live",
+          "complete": false
+        }
+      ]
+    },
+    {
+      "id": "eng-007",
+      "clientName": "Litware Analytics Co",
+      "status": "completed",
+      "budget": 75000,
+      "actuals": 78000,
+      "hoursLogged": 360,
+      "percentComplete": 100,
+      "startDate": "2025-11-01",
+      "endDate": "2026-03-31",
+      "timeline": [
+        {
+          "date": "2025-11-01",
+          "milestone": "Kickoff",
+          "complete": true
+        },
+        {
+          "date": "2026-01-15",
+          "milestone": "Model delivery",
+          "complete": true
+        },
+        {
+          "date": "2026-03-31",
+          "milestone": "Handover",
+          "complete": true
+        }
+      ]
+    }
+  ]
+}
