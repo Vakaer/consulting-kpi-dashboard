@@ -11,6 +11,7 @@ import Paper from '@mui/material/Paper';
 
 import { StatusBadge } from '@/components/StatusBadge';
 import type { Engagement } from '@/types/engagement';
+import { formatCurrency } from '@/utils/format-currency';
 
 interface EngagementTableProps {
   engagements: Engagement[];
@@ -23,14 +24,6 @@ const ClickableRow = styled(TableRow)(({ theme }) => ({
     outlineOffset: -2,
   },
 }));
-
-function formatCurrency(n: number) {
-  return new Intl.NumberFormat(undefined, {
-    style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 0,
-  }).format(n);
-}
 
 export function EngagementTable({ engagements }: EngagementTableProps) {
   const navigate = useNavigate();

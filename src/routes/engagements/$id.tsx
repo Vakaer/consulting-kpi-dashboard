@@ -12,6 +12,7 @@ import { TimelineChart } from '@/components/TimelineChart';
 import { StatusBadge } from '@/components/StatusBadge';
 import { BudgetChart } from '@/components/BudgetChart';
 import { useEngagement } from '@/api/hooks';
+import { formatCurrency } from '@/utils/format-currency';
 
 export const Route = createFileRoute('/engagements/$id')({
   component: EngagementDetailPage,
@@ -31,14 +32,6 @@ const MetaRow = styled(Stack)(({ theme }) => ({
   alignItems: 'center',
   marginBottom: theme.spacing(3),
 }));
-
-function formatCurrency(n: number) {
-  return new Intl.NumberFormat(undefined, {
-    style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 0,
-  }).format(n);
-}
 
 function EngagementDetailPage() {
   const params = useParams({ strict: false });

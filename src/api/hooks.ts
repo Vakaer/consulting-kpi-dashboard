@@ -1,13 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { fetchEngagementById, fetchEngagements } from '@/api/engagements';
-import type { EngagementFilters } from '@/types/engagement';
 import { QUERY_KEYS } from '@/constants/query-keys';
 
-export function useEngagements(filters: EngagementFilters) {
+export function useEngagements() {
   return useQuery({
-    queryFn: () => fetchEngagements(filters),
-    queryKey: QUERY_KEYS.engagements(filters),
+    queryFn: () => fetchEngagements({ status: 'all' }),
+    queryKey: QUERY_KEYS.engagements,
   });
 }
 

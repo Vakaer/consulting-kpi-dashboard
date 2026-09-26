@@ -11,28 +11,26 @@ import Box from '@mui/material/Box';
 import type { EngagementFilters as Filters } from '@/types/engagement';
 import { EngagementFilters } from '@/components/EngagementFilters';
 import { EngagementTable } from '@/components/EngagementTable';
+import { applyEngagementFilters } from '@/api/engagements';
 import { computeDashboardKpis } from '@/api/kpi';
 import { KpiCard } from '@/components/KpiCard';
 import { useEngagements } from '@/api/hooks';
+import { formatCurrency } from '@/utils/format-currency';
 
 export const Route = createFileRoute('/')({
   component: DashboardPage,
 });
 
-function formatCurrency(n: number) {
-  return new Intl.NumberFormat(undefined, {
-    style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 0,
-  }).format(n);
-}
-
 function DashboardPage() {
   const [filters, setFilters] = useState<Filters>({ status: 'all' });
-  const { data, error, isLoading, isFetching, refetch } =
-    useEngagements(filters);
+  const { data: allEngagements, error, isLoading, isFetching, refetch } =
+    useEngagements();
 
-  const kpis = useMemo(() => computeDashboardKpis(data ?? []), [data]);
+  const data = useMemo(
+    () => applyEngagementFilters(allEngagements ?? [], filters),
+    [allEngagements, filters],
+  );
+  const kpis = useMemo(() => computeDashboardKpis(data), [data]);
 
   return (
     <Box>
